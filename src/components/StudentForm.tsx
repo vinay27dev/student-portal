@@ -21,6 +21,10 @@ export default function StudentForm({
   initialOtherFields = {},
 }: StudentFormProps) {
   const router = useRouter();
+  
+  // Responsive State Variables for input values
+  const [studentPhone, setStudentPhone] = useState(initialStudentPhone);
+  const [parentPhone, setParentPhone] = useState(initialParentPhone);
   const [studentName, setStudentName] = useState(initialStudentName);
   const [email, setEmail] = useState(initialOtherFields.email || "");
   const [schoolName, setSchoolName] = useState(initialOtherFields.schoolName || "");
@@ -55,7 +59,6 @@ export default function StudentForm({
     }
     setError("");
 
-    // Convert file to Base64 for the 'signatureUrl' field
     const reader = new FileReader();
     reader.onload = (event) => {
       setSignatureData(event.target?.result as string);
@@ -90,8 +93,8 @@ export default function StudentForm({
     setLoading(true);
 
     const res = await submitStudentForm({
-      studentPhone: initialStudentPhone,
-      parentPhone: initialParentPhone,
+      studentPhone: studentPhone,
+      parentPhone: parentPhone,
       studentName,
       otherFields: { email, schoolName, grade, parentName, parentAddress, parentSignatureData },
       signatureUrl: signatureData,
@@ -141,7 +144,7 @@ export default function StudentForm({
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Read-only Phone Numbers from Session */}
+          {/* Now Editable Phone Numbers */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700">Student Phone</label>
@@ -152,9 +155,10 @@ export default function StudentForm({
                 <input
                   type="tel"
                   maxLength={10}
-                  readOnly
-                  value={initialStudentPhone}
-                  className="w-full pl-11 pr-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 cursor-not-allowed"
+                  value={studentPhone}
+                  onChange={(e) => setStudentPhone(e.target.value)}
+                  placeholder="Enter student phone number"
+                  className="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-800 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"
                 />
               </div>
             </div>
@@ -167,9 +171,10 @@ export default function StudentForm({
                 <input
                   type="tel"
                   maxLength={10}
-                  readOnly
-                  value={initialParentPhone}
-                  className="w-full pl-11 pr-4 py-2.5 bg-slate-100 border border-slate-200 rounded-xl text-slate-500 cursor-not-allowed"
+                  value={parentPhone}
+                  onChange={(e) => setParentPhone(e.target.value)}
+                  placeholder="Enter parent phone number"
+                  className="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-slate-800 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all"
                 />
               </div>
             </div>
@@ -336,7 +341,7 @@ export default function StudentForm({
               className="flex-1 py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 group"
             >
               <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              Preview PDF
+              <Preview PDF
             </button>
             <button
               type="submit"
@@ -359,7 +364,6 @@ export default function StudentForm({
       {/* Live Preview Modal Overlay */}
       {showPreview && (
         <div className="fixed inset-0 bg-slate-900/90 z-50 overflow-y-auto p-4 sm:p-8 flex flex-col">
-          {/* Modal Header */}
           <div className="flex justify-between items-center mb-6 max-w-3xl mx-auto w-full sticky top-0 bg-slate-900/90 py-4 z-10 backdrop-blur-sm">
             <h2 className="text-white font-bold text-xl flex items-center gap-2">
               <Eye className="w-5 h-5 text-indigo-400" />
@@ -381,8 +385,8 @@ export default function StudentForm({
               <div className="space-y-6 font-serif text-black text-sm sm:text-base">
                 <div className="flex"><span className="font-bold w-32 sm:w-40">Student Name:</span> <span>{studentName || 'N/A'}</span></div>
                 <div className="flex"><span className="font-bold w-32 sm:w-40">Email Address:</span> <span>{email || 'N/A'}</span></div>
-                <div className="flex"><span className="font-bold w-32 sm:w-40">Student Phone:</span> <span>{initialStudentPhone}</span></div>
-                <div className="flex"><span className="font-bold w-32 sm:w-40">Parent Phone:</span> <span>{initialParentPhone}</span></div>
+                <div className="flex"><span className="font-bold w-32 sm:w-40">Student Phone:</span> <span>{studentPhone}</span></div>
+                <div className="flex"><span className="font-bold w-32 sm:w-40">Parent Phone:</span> <span>{parentPhone}</span></div>
                 <div className="flex"><span className="font-bold w-32 sm:w-40">School Name:</span> <span>{schoolName || 'N/A'}</span></div>
                 <div className="flex"><span className="font-bold w-32 sm:w-40">Grade Level:</span> <span>{grade || 'N/A'}</span></div>
               </div>
@@ -406,7 +410,7 @@ export default function StudentForm({
               
               <div className="space-y-6 font-serif text-black text-sm sm:text-base">
                 <div className="flex flex-col sm:flex-row"><span className="font-bold w-full sm:w-56">Name of Parent/Guardian:</span> <span className="mt-1 sm:mt-0">{parentName || 'N/A'}</span></div>
-                <div className="flex flex-col sm:flex-row"><span className="font-bold w-full sm:w-56">Mobile Number:</span> <span className="mt-1 sm:mt-0">{initialParentPhone}</span></div>
+                <div className="flex flex-col sm:flex-row"><span className="font-bold w-full sm:w-56">Mobile Number:</span> <span className="mt-1 sm:mt-0">{parentPhone}</span></div>
                 <div className="flex flex-col sm:flex-row">
                   <span className="font-bold w-full sm:w-56">Address:</span>
                   <span className="mt-1 sm:mt-0 whitespace-pre-wrap flex-1">{parentAddress || 'N/A'}</span>
