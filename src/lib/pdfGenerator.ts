@@ -9,7 +9,8 @@ export type PDFData = {
   version: number;
 };
 
-export async function generateSubmissionPDF(data: PDFData): Promise<Uint8Array> {
+// Fixed function name to match your server action import
+export async function generatePDF(data: PDFData): Promise<Uint8Array> {
   const { studentName, studentPhone, parentPhone, otherFields, signatureUrl, version } = data;
 
   // Sanitize text to prevent pdf-lib glyph rendering errors (strips emojis and non-WinAnsi chars)
