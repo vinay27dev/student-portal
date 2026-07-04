@@ -336,13 +336,13 @@ export default function StudentForm({
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <button
-              type="button"
-              onClick={handleOpenPreview}
-              className="flex-1 py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 group"
-            >
-              <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <Preview PDF
-            </button>
+  type="button"
+  onClick={handleOpenPreview}
+  className="flex-1 py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 group"
+>
+  <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
+  Preview PDF
+</button>
             <button
               type="submit"
               disabled={loading}
