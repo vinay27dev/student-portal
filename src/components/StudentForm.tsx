@@ -144,7 +144,7 @@ export default function StudentForm({
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Now Editable Phone Numbers */}
+          {/* Phone Numbers Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700">Student Phone</label>
@@ -182,7 +182,7 @@ export default function StudentForm({
 
           <div className="h-px bg-slate-100 w-full my-6"></div>
 
-          {/* Form Fields */}
+          {/* Cleaned Name and Email Fields */}
           <div className="space-y-2">
             <label className="text-sm font-medium text-slate-700">Student Name <span className="text-red-500">*</span></label>
             <div className="relative">
@@ -193,7 +193,7 @@ export default function StudentForm({
                 type="text"
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
-                placeholder="John Doe"
+                placeholder=""
                 className="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all text-slate-800"
               />
             </div>
@@ -205,12 +205,13 @@ export default function StudentForm({
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="john@example.com"
+              placeholder=""
               className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all text-slate-800"
               required
             />
           </div>
 
+          {/* Cleaned School and Grade Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-medium text-slate-700">School Name</label>
@@ -218,7 +219,7 @@ export default function StudentForm({
                 type="text"
                 value={schoolName}
                 onChange={(e) => setSchoolName(e.target.value)}
-                placeholder="Lincoln High School"
+                placeholder=""
                 className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all text-slate-800"
               />
             </div>
@@ -228,7 +229,7 @@ export default function StudentForm({
                 type="text"
                 value={grade}
                 onChange={(e) => setGrade(e.target.value)}
-                placeholder="10th Grade"
+                placeholder=""
                 className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all text-slate-800"
               />
             </div>
@@ -284,7 +285,7 @@ export default function StudentForm({
                     type="text"
                     value={parentName}
                     onChange={(e) => setParentName(e.target.value)}
-                    placeholder="Jane Doe"
+                    placeholder=""
                     className="w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all text-slate-800"
                   />
                 </div>
@@ -295,7 +296,7 @@ export default function StudentForm({
                 <textarea
                   value={parentAddress}
                   onChange={(e) => setParentAddress(e.target.value)}
-                  placeholder="Full Residential Address"
+                  placeholder=""
                   rows={3}
                   className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 outline-none transition-all text-slate-800 resize-none"
                 />
@@ -336,13 +337,13 @@ export default function StudentForm({
 
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <button
-  type="button"
-  onClick={handleOpenPreview}
-  className="flex-1 py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 group"
->
-  <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
-  Preview PDF
-</button>
+              type="button"
+              onClick={handleOpenPreview}
+              className="flex-1 py-3.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 group"
+            >
+              <Eye className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              Preview PDF
+            </button>
             <button
               type="submit"
               disabled={loading}
